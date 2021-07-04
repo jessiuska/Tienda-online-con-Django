@@ -1,0 +1,39 @@
+{% extends "plantilla.html" %} 
+{% load crispy_forms_tags %} 
+{% block body %}
+
+    <div class="container display: flex">
+        <div class="justify-content: center text-center">
+            
+                <div class="col-sm-6">
+                    <div class="card center">
+                        <div class="card-body center">
+                        {% if form.errors  %}
+                            <div class="alert alert-danger" role="alert">
+                                Error!
+                            </div>
+                        {% endif %} 
+                            <form action="{% url 'APP:alta' %}" method="POST" enctype="multipart/form-data">
+                                {%csrf_token %}
+                                   
+                                {% if mensaje  %}
+                                    <div class="alert alert-success" role="alert">
+                                        Registro exitoso!
+                                    </div>
+                                {% endif %}
+                                {{form|crispy}}
+                                <button type="submit" class="btn btn-primary">Crear</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% comment %}
+    href="{% url 'APP:alta' %}"
+{% endcomment %}

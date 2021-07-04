@@ -1,0 +1,65 @@
+{% extends "plantilla.html" %} {% block body %}
+<div class="container display: flex">
+    <div class="row justify-content-center">
+        
+         
+        <table class="table table-borde" style="color:black">
+            <thead>
+                <tr>
+                    <th colspan="3" class="text-center">
+                    CARRO COMPRAS
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if request.session.carro.items %}
+                    {% for key, value in request.session.carro.items%}
+                        <tr class="text-center">
+                            <td>{{value.titulo}}</td>
+                            <td>{{value.cantidad}}</td>
+                            <td>
+                                <a href="{% url 'CARRO:agregar' value.producto_id%}" class="btn btn-primary btn-sm">+</a>
+                                <a href="{% url 'CARRO:restar' value.producto_id%}" class="btn btn-primary btn-sm">-</a><br/>
+                                {{value.precio}} $
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3">
+                            <div class="alert alert-danger text-center">
+                                Sin productos
+                            </div>
+                        </td>    
+                    </tr>
+                {% endif%}
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <b>Total($):</b> {{importe_total_carro}}
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <a href="{% url 'CARRO:limpiar' %}" class="btn btn-primary btn-sm">Vaciar Carrito</a>
+                        <a href="#" class="btn btn-primary btn-sm">Finalizar Compra</a><br/>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>                
+    </div>
+</div>
+{% endblock %}
+
+{% comment %}
+                
+{% endcomment %}
+            

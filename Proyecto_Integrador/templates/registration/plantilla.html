@@ -1,0 +1,100 @@
+{% load crispy_forms_tags %} 
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Jaguarete KAA S.A</title>
+    <link rel=stylesheet " href="{% static '/style.css'%} ">
+    
+</head>
+
+<body>
+    <!--ENCABEZADO-->
+    <div class="container ">
+        <div class="row">
+            <div class="col ">
+                <!--imagen del logo-->
+                <div>
+                    <img src="{% static 'imagenes/logo.png' %} " class="rounded float-start " alt="logotipo " width="200px " height="200px ">
+                </div>
+            </div>
+
+            <div class="col mt-3 ">
+                <!--botones del encabezado-->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+                    {% if user.is_authenticated %}
+                        <p>Usuario: {{user.get_username}}</p>
+                        <a href="{% url 'logout'%}?next={{ request.path }}" class="btn btn-primary">Salir</a>
+                    {% else %} 
+                        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    {% endif %} 
+                    <a href="{% url 'USUARIOS:registrarse'%}" class="btn btn-primary">Registrarse</a>
+                    
+                    <a href="{% url 'CARRO:carrito' %}" class="btn btn-primary">Carrito</a>
+                    
+                </div>
+            </div>
+        </div>     
+    </div>}
+  
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'APP:index'%}">HOME</a>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                CATEGORIAS
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                {% for p in categorias %}
+                    <a class="dropdown-item" href="{% url 'APP:busqueda' %}">{{p.descripcion}}</a>
+                    
+                {% endfor %}
+                </div>
+            </div>
+
+            <a class="navbar-brand" href="{% url 'APP:acercade'%}">ACERCA DE</a>
+            <a class="navbar-brand" href="{% url 'APP:contacto'%}">CONTACTO</a>
+            {%if request.user.is_superuser%}
+                <a class="navbar-brand" href="{% url 'APP:alta' %}">NUEVO PRODUCTO</a>
+            {% endif %}
+            <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand"></a>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <a class="btn btn-primary" href="{% url 'APP:busqueda' %}" type="submit" role="button">Buscar</a>
+                </form>
+            </nav>         
+        </div>
+    </nav>
+    
+    
+    
+    {% block body %} ... {% endblock %}
+
+    <!--FOOTER-->
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3 card">© 2021 Copyright:<br/>
+    <p>Creado por Jessiuska Carvajal</p>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js " integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns " crossorigin="anonymous "></script>
+</body>
+
+</html>

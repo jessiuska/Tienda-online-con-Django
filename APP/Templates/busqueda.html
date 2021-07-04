@@ -1,0 +1,35 @@
+{% extends "plantilla.html" %} 
+{% load crispy_forms_tags %} 
+{% block body %}
+<div class="container display: flex">
+    <div class="justify-content: center text-center">
+        <div class="col-sm-6">
+            <div class="card center">
+                <div class="card-body center">
+                <h2>Buscador de Productos</h2>
+                    <form action="{% url 'APP:busqueda' %}" method="POST">
+                        {%csrf_token%}
+                        {{form|crispy}}
+                        
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                
+                            
+                        {% for p in productos %}
+                        <a class="dropdown-item" href="{% url 'APP:productos' p.id %}"> {{p.titulo}} - {{p.categoria}} - {{p.descripcion}} </a>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>     
+        </div> 
+    </div>
+</div>        
+  
+
+
+
+    
+{% endblock %}
+{% comment %}
+    
+    href="{% url 'APP:productos' p.id %}"
+{% endcomment %}

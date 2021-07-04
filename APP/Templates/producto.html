@@ -1,0 +1,36 @@
+{% extends "plantilla.html" %} {% block body %}
+    
+    
+    <div class="justify-content-center">
+        
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ productos.imagen.url }}" alt="fotoProducto" width="200px" >
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{productos.titulo}}</h5>
+                            <p class="card-text">Descripcion: {{ productos.descripcion }}</p>
+                            <p class="card-text">Categoria: {{ productos.categoria }}</p>
+                            <p class="card-text">Precio ($): {{ productos.precio }}</p>
+                            <p class="card-text"><small class="text-muted">Actualizado</small></p>
+                            <a href="{% url 'CARRO:agregar' productos.id %}  " class="btn btn-primary">AGREGAR AL CARRITO</a>
+                            {%if request.user.is_superuser%}
+                            <a class="btn btn-warning" href="{% url 'APP:modificar' productos.id %}" type="submit" role="button">Editar</a>
+                            <a class="btn btn-warning" href="{% url 'APP:eliminar' productos.id %}" type="submit" role="button">Eliminarr</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    </div>           
+              
+    
+{% endblock %}
+
+{% comment %}
+       {% url 'CARRO:agregar' value.producto_id %}         
+{% endcomment %}
+            

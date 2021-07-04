@@ -1,0 +1,28 @@
+{% extends "registration/plantilla.html" %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="justify-content: center">
+        <div class="text-left card">
+            <h2>Formulario de Registro</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for campo in form %}
+                    <p>
+                    {{ campo.label_tag }}<br>
+                    {{ campo }}
+                    {% if campo.help_text %}
+                        <small style="color: grey">{{ campo.help_text }}</small>
+                    {% endif %}
+                    {% for error in campo.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                    </p>
+                {% endfor %}
+                
+                <input class="btn btn-primary" type="submit" value="Confirmar Registro">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

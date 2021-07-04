@@ -1,0 +1,37 @@
+{% extends "plantilla.html" %} {% block body %}
+<div class="container-fluid">
+  <div class="justify-content: center"> 
+    <div class="card-center" style="width: 40rem;">
+      <div class="card-body center">
+        <h4 class="text-center">El mail de JAGUARETE KAA S.A es: Jaguarete.tienda@gmail.com</h4>
+   
+        <form>
+          <div class="container sm">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Email </label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Seleccione el tipo de consulta</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Consultas de productos</option>
+                  <option>Sugerencias</option>
+                  <option>Lista de precios</option>
+                  <option>Envios</option>
+                  <option>Otros</option>
+              </select>
+          </div>
+      
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Escriba su consulta aquí</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
